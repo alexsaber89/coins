@@ -1,60 +1,39 @@
-// Write a program that will convert a dollar amount to the number of coins that make up the amount
-// Use the common American coins of quarters, dimes, nickels, and pennies.
-
-/*
-  Input: 0.67
-  Output:
-  {
-    quarters: 2,
-    dimes: 1,
-    nickels: 1,
-    pennies: 2
-  }
-
-*/
-
 function coinCounter (dollarAmount) {
-  // Initialize a JavaScript object to hold the coins
-  var workingDollarAmount = dollarAmount * 100;
+  console.log("Input: ",dollarAmount);
+  console.log("Output: ");
+  var workingDollarAmount = Math.floor(dollarAmount * 100); //when not using Math.floor, why does this return decimals only for ".14"?
   var coinPurse = {};
   var change;
 
+  //Quarters
   if (workingDollarAmount % 25 === 0) {
     coinPurse.quarters = workingDollarAmount / 25;
-    console.log("Quarters: " + coinPurse.quarters);
+    change = 0;
   } else {
-    coinPurse.quarters = workingDollarAmount / 25;
-    console.log("Quarters: " + coinPurse.quarters);
-    change = workingDollarAmount % 25; //gives the remainder of change
-    console.log("Change: ",change);
+    coinPurse.quarters = Math.floor(workingDollarAmount / 25);
+    change = workingDollarAmount % 25;
   };
 
-  // if (change % 10 === 0) {
-  //   coinPurse.dimes = change / 10;
-  //   console.log("Dimes: " + coinPurse.dimes);
-  // } else {
-  //   coinPurse.dimes = change / 10;
-  //   console.log("Dimes: " + coinPurse.dimes);
-  //   change = change % 10; //gives the remainder of change
-  //   console.log("Change: ",change);
-  // };
+  //Dimes
+    if (change % 10 === 0) {
+    coinPurse.dimes = change / 10;
+    change = 0;
+  } else {
+    coinPurse.dimes = Math.floor(change / 10);
+    change = change % 10;
+  };
 
-  // if (change % 5 === 0) {
-  //   coinPurse.nickels = change / 5;
-  //   console.log("Nickels: " + coinPurse.nickels);
-  // } else {
-  //   coinPurse.nickels = change / 5;
-  //   console.log("Nickels: " + coinPurse.nickels);
-  //   change = change % 5; //gives the remainder of change
-  //   console.log("Change: ",change);
-  // };
-
-  // coinPurse.pennies = change;
-
-  // return coinPurse;
+  //Nickels & Pennies
+    if (change % 5 === 0) {
+    coinPurse.nickels = change / 5;
+    change = 0;
+    coinPurse.pennies = 0;
+  } else {
+    coinPurse.nickels = Math.floor(change / 5);
+    change = change % 5;
+    coinPurse.pennies = change;
+  };
+  return coinPurse;
 }
 
-console.log(coinCounter(.60));
-
-// var coins = coinCounter()
-// console.log();
+console.log(coinCounter(.93));
