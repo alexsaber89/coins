@@ -1,7 +1,7 @@
 function coinCounter (dollarAmount) {
   console.log("Input: ",dollarAmount);
   console.log("Output: ");
-  var workingDollarAmount = Math.floor(dollarAmount * 100); //when not using Math.floor, why does this return decimals only for ".14"?
+  var workingDollarAmount = Math.round(dollarAmount * 100);
   var coinPurse = {};
   var change;
 
